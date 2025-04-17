@@ -25,6 +25,12 @@ const k = kaplay({
         right:{
             keyboard: ["right"]
         },
+        up:{
+            keyboard: ["up"]
+        },
+        down:{
+            keyboard: ["down"]
+        },
     }
 })
 
