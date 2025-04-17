@@ -1,4 +1,4 @@
-import { spawnPlayer, bindPlayerMovement, initStateMachine } from "../entities/player.js"
+import { spawnPlayer, bindPlayerMovement, initStateMachine} from "../entities/player.js"
 export default async function mainWorld(){
 
     loadSprite("player","assets/sprites/player.png", {
@@ -19,6 +19,8 @@ export default async function mainWorld(){
     const player = add(spawnPlayer(10,0))
     initStateMachine(player)
     bindPlayerMovement(player)
+    // grounder(player)
+    debug.inspect = true
     const floor = add([
         rect(300,1),
         pos(vec2(10,30)),

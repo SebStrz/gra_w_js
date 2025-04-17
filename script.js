@@ -7,10 +7,26 @@
 //        ])
 //    })
 //})
-import kaplay from  "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
+import kaplay from  "https://unpkg.com/kaplay@4000.0.0-alpha.18/dist/kaplay.mjs";
 import LoadScenes from "./scenes/sceneLoader.js"
 import mainWorld from "./scenes/mainWorld.js";
-const k = kaplay({ debugKey: "escape" })
+const k = kaplay({
+    debugKey: "escape",
+    buttons: {
+        jump:{
+            keyboard: ["space", "z"]
+        },
+        dash:{
+            keyboard: ["x"]
+        },
+        left:{
+            keyboard: ["left"]
+        },
+        right:{
+            keyboard: ["right"]
+        },
+    }
+})
 
 //scene("mainWorld",mainWorld)
 await LoadScenes()
@@ -21,3 +37,7 @@ setCamPos(10,10);
 setCamScale(3)
 console.log(getCamPos());
 console.log(getCamScale());
+
+function YY(){
+    get("player").pos.y -= 10
+}
