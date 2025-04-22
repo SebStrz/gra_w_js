@@ -1,6 +1,13 @@
 import { spawnPlayer, bindPlayerMovement, initStateMachine} from "../entities/player.js"
 export default async function mainWorld(){
 
+    loadSprite("up", "assets/sprites/up.png")
+    loadSprite("down", "assets/sprites/down.png")
+    loadSprite("left", "assets/sprites/left.png")
+    loadSprite("right", "assets/sprites/right.png")
+    loadSprite("x", "assets/sprites/X.png")
+    loadSprite("z", "assets/sprites/Z.png")
+
     loadSprite("player","assets/sprites/player.png", {
         sliceX: 10,
         sliceY: 8,
@@ -16,19 +23,65 @@ export default async function mainWorld(){
 
         },
     })
+
     const player = add(spawnPlayer(10,0))
     initStateMachine(player)
     bindPlayerMovement(player)
     // grounder(player)
+
+    const arrows = add([
+        pos(-10,-40),
+        area({
+            shape: new Rect(vec2(0,0),45,40)
+        }),
+    ])
+
+    arrows.add([
+        sprite("left"),
+        pos(1,15),
+    ])
+    arrows.add([
+        sprite("down"),
+        pos(15,15),
+    ])
+    arrows.add([
+        sprite("right"),
+        pos(29,15),
+    ])
+    arrows.add([
+        sprite("up"),
+        pos(15,2),
+    ])
+    arrows.add([
+        text("poruszanie sie",{
+            size: 5
+        }),
+        pos(2,30)
+    ])
+
     debug.inspect = true
-    const floor = add([
-        rect(300,1),
-        pos(vec2(10,30)),
+    add([
+        rect(600,1),
+        pos(vec2(-300,30)),
         //outline(2),
         area({ friction: 1}),
         body({isStatic: true})
 
     ])
+
+    /*add([
+        sprite("kbrd")
+    ])*/
+
+    let v = vec2(0,0)
+
+    onUpdate(() => {
+        if( !player.vel.eq(v) ){
+            debug.log(player.vel)
+        }
+        Vec2.copy(player.vel, v)
+    })
+
     setCamPos(10,10);
     setCamScale(3)
 }

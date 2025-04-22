@@ -8,7 +8,7 @@ Błędy:
 
 */
 
-const JUMP_Y = -150
+const JUMP_Y = -200
 var startTime, timerCtrl, jumped, leftB, rightB, upB, downB
 
 export function spawnPlayer(position){
@@ -21,11 +21,11 @@ export function spawnPlayer(position){
         anchor("center"),
         area({
             shape: new Rect( vec2(0,0), 11, 20),
-            friction: 0.10,
+            friction: 1,
             restitution: 0
         }),
         body({
-            damping: 1
+            //damping: 1
         }),
         {
             state: "idle",
@@ -39,6 +39,7 @@ export function spawnPlayer(position){
         "player",
     ]
 }
+
 export function bindPlayerMovement(player){
 
     bindDash(player)
@@ -49,7 +50,7 @@ export function bindPlayerMovement(player){
 
    player.onGround(() => {
         player.canRun = true
-        player.canJump = true
+        //player.isGrounded() = true
         player.canDash = true
    })
 }
@@ -172,7 +173,7 @@ function bindRun(player) {
 function bindJump(player) {
     return [
         onButtonPress("jump",() => {
-            if (player.canJump) {
+            if (player.isGrounded()) {
                 startTime = Date.now()
                 player.canRun = false
                 jumped = false
@@ -192,7 +193,7 @@ function bindJump(player) {
                             break;
                     }
 
-                    player.canJump = false
+                //    player.isGrounded() = false
                 //    player.canRun = true
                     jumped = true
                 })
@@ -201,7 +202,7 @@ function bindJump(player) {
             }
         }),
         onButtonRelease("jump", () => {
-            if ( player.canJump && !jumped) {
+            if ( player.isGrounded() && !jumped) {
                 let factor = (Date.now() - startTime)/1000
                 timerCtrl.cancel()
                 switch (player.direction) {
@@ -219,7 +220,7 @@ function bindJump(player) {
                         break;
                 }
 
-                player.canJump = false
+                //player.isGrounded() = false
 
                 console.log(factor * JUMP_Y, factor)
             }

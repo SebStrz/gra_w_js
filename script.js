@@ -37,10 +37,8 @@ const k = kaplay({
 //scene("mainWorld",mainWorld)
 await LoadScenes()
 setGravity(300)
-await go("mainWorld")
-
-setCamPos(10,10);
-setCamScale(3)
+// await go("mainWorld")
+go("mainWorld")
 console.log(getCamPos());
 console.log(getCamScale());
 

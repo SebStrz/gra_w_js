@@ -1,9 +1,9 @@
 import mainWorld from "./mainWorld.js"
-import test from "./test.js"
+import mainMenu from "./mainMenu.js"
 export default async function LoadScenes(){
     const scenes = {
         mainWorld,
-        test
+        mainMenu,
     }
 
     for (const sceneName in scenes){
