@@ -34,6 +34,8 @@ const k = kaplay({
     }
 })
 
+loadFont("moje", "./assets/font/Round9x13.ttf")
+
 //scene("mainWorld",mainWorld)
 await LoadScenes()
 setGravity(300)
@@ -42,6 +44,6 @@ go("mainWorld")
 console.log(getCamPos());
 console.log(getCamScale());
 
-function YY(){
-    get("player").pos.y -= 10
-}
+onMouseMove((p, d) => {
+    debug.log(p)
+})

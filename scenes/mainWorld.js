@@ -1,4 +1,6 @@
 import { spawnPlayer, bindPlayerMovement, initStateMachine} from "../entities/player.js"
+import block from "../entities/block.js"
+import { displayBlinkingMsg } from "../utils.js"
 export default async function mainWorld(){
 
     loadSprite("up", "assets/sprites/up.png")
@@ -30,7 +32,7 @@ export default async function mainWorld(){
     // grounder(player)
 
     const arrows = add([
-        pos(-10,-40),
+        pos(-40,-40),
         area({
             shape: new Rect(vec2(0,0),45,40)
         }),
@@ -54,21 +56,65 @@ export default async function mainWorld(){
     ])
     arrows.add([
         text("poruszanie sie",{
-            size: 5
+            size: 8,
+            font: "moje",
+            align: "center"
+
         }),
-        pos(2,30)
+        anchor("center"),
+        pos(24,33)
+    ])
+
+    const jumpTutorial = add([
+        pos(62,-40),
+        area({
+            shape: new Rect(vec2(0,0),15,40)
+        })
+    ])
+    jumpTutorial.add([
+        text("przytrzymaj", {
+            size: 8,
+            font: "moje",
+            align: "center"
+        }),
+        anchor("center"),
+        pos(7,12)
+    ])
+    jumpTutorial.add([
+        sprite("z"),
+        pos(0,15)
+    ])
+    jumpTutorial.add([
+        text("aby skoczyć",{
+            size: 8,
+            font: "moje",
+            align: "center"
+        }),
+        anchor("center"),
+        pos(7,33),
     ])
 
     debug.inspect = true
     add([
         rect(600,1),
-        pos(vec2(-300,30)),
+        pos(-300,30),
         //outline(2),
         area({ friction: 1}),
         body({isStatic: true})
 
     ])
 
+    add([
+        rect(10,10),
+        pos(0,0),
+        area()
+    ])
+
+    add(block(vec2(150,-28),vec2(100,3)))
+
+    add(block(vec2(-21,-90),vec2(100,3)))
+
+    displayBlinkingMsg("up!", vec2(26,-100))
     /*add([
         sprite("kbrd")
     ])*/

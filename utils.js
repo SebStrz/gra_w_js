@@ -4,7 +4,7 @@ export function playIfNotPlaying(obj, animation){
 
 export function displayBlinkingMsg(msg, position){
    const message = add([
-      text(msg, { size: 24, font: "Round" }),
+      text(msg, { size: 24, font: "moje" }),
       area(),
       anchor("center"),
       pos(position),

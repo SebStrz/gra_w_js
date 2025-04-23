@@ -19,6 +19,7 @@ export function spawnPlayer(position){
         }),
         pos(position),
         anchor("center"),
+        z(10),
         area({
             shape: new Rect( vec2(0,0), 11, 20),
             friction: 1,
@@ -219,7 +220,7 @@ function bindJump(player) {
 
                         break;
                 }
-
+                jumped = true
                 //player.isGrounded() = false
 
                 console.log(factor * JUMP_Y, factor)
