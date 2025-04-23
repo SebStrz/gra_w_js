@@ -2,8 +2,8 @@
 Small platformer game written in javascript with kaplay v4000 alpha
 
 ## Table of contents
-- [Instalation] (#Instalation)
-- [Usage] (#Usage)
+- [Instalation](#Instalation)
+- [Usage](#Usage)
 
 ## Instalation
 1. Clone the repository:
