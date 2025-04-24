@@ -44,6 +44,3 @@ go("mainWorld")
 console.log(getCamPos());
 console.log(getCamScale());
 
-onMouseMove((p, d) => {
-    debug.log(p)
-})

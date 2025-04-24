@@ -1,4 +1,4 @@
-import { playIfNotPlaying } from "../utils.js"
+import { playIfNotPlaying, jumpInterpolationFunction } from "../utils.js"
 
 /*
 Błędy:
@@ -57,12 +57,17 @@ export function bindPlayerMovement(player){
 }
 
 export function initStateMachine(player){
+    let sigma = 40
     onUpdate(() => {
         if ( player.state === "run"){
             playIfNotPlaying(player, "run")
             //debug.log("run")
         } else if ( player.state === "idle"){
             playIfNotPlaying(player, "idle")
+        }
+        if (player.pos.y < sigma){
+            sigma = player.pos.y
+            debug.log(sigma)
         }
     })
 }
@@ -205,25 +210,26 @@ function bindJump(player) {
         onButtonRelease("jump", () => {
             if ( player.isGrounded() && !jumped) {
                 let factor = (Date.now() - startTime)/1000
+                let finalFactor = jumpInterpolationFunction(factor)
                 timerCtrl.cancel()
                 switch (player.direction) {
                     case "left":
-                        player.applyImpulse(vec2(-100,JUMP_Y*factor))
+                        player.applyImpulse(vec2(-100,JUMP_Y*finalFactor))
 
                         break;
                     case "right":
-                        player.applyImpulse(vec2(100,JUMP_Y*factor))
+                        player.applyImpulse(vec2(100,JUMP_Y*finalFactor))
 
                         break
                     default:
-                        player.applyImpulse(vec2(0,JUMP_Y*factor))
+                        player.applyImpulse(vec2(0,JUMP_Y*finalFactor))
 
                         break;
                 }
                 jumped = true
                 //player.isGrounded() = false
 
-                console.log(factor * JUMP_Y, factor)
+                console.log(finalFactor * JUMP_Y, factor)
             }
         })
     ]

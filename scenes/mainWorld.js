@@ -26,7 +26,7 @@ export default async function mainWorld(){
         },
     })
 
-    const player = add(spawnPlayer(10,0))
+    const player = add(spawnPlayer(vec2(10,30)))
     initStateMachine(player)
     bindPlayerMovement(player)
     // grounder(player)
@@ -96,7 +96,7 @@ export default async function mainWorld(){
 
     debug.inspect = true
     add([
-        rect(600,1),
+        rect(400,1),
         pos(-300,30),
         //outline(2),
         area({ friction: 1}),
@@ -104,13 +104,7 @@ export default async function mainWorld(){
 
     ])
 
-    add([
-        rect(10,10),
-        pos(0,0),
-        area()
-    ])
-
-    add(block(vec2(150,-28),vec2(100,3)))
+    add(block(vec2(150,-10),vec2(10,3)))
 
     add(block(vec2(-21,-90),vec2(100,3)))
 
@@ -121,12 +115,12 @@ export default async function mainWorld(){
 
     let v = vec2(0,0)
 
-    onUpdate(() => {
-        if( !player.vel.eq(v) ){
-            debug.log(player.vel)
-        }
-        Vec2.copy(player.vel, v)
-    })
+  //  onUpdate(() => {
+  //      if( !player.vel.eq(v) ){
+  //          debug.log(player.vel)
+  //      }
+  //      Vec2.copy(player.vel, v)
+  //  })
 
     setCamPos(10,10);
     setCamScale(3)
